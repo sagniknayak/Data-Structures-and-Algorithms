@@ -2,25 +2,26 @@ class Stack:
     '''
      Implementation of Stack in Python
     '''
-    def __init__(self, size = None):
+    def __init__(self, capacity = None):
         '''
-        __init__ Initializes the Stack.
+        __init__ Initializes the Stack and its variables.
 
         Args:
-            size (int, optional): Size of the Stack, None indicates indefinite size. Defaults to None.
+            capacity (int, optional): Represents the maximum capacity of the Stack, None means the capacity is undefined.
+            Defaults to None.
         '''
-        self._flag_overflow, self._max_size = [True, size] if size is not None else [False, -1]
+        self._flag_overflow, self._max_capacity = [True, capacity] if capacity is not None else [False, -1]
         self._stack = list()
         self._top = -1
     
-    def __check_overflow__(self):
+    def full(self):
         '''
-        __check_overflow__ Checks if the Stack is overflowing.
+        full Checks if the Stack is full.
 
         Returns:
-            boolean: Indicates whether the Stack is overflowing.
+            boolean: Value indicating if the Stack is full or not.
         '''
-        return self._top == self._max_size - 1 if self._flag_overflow else False
+        return self._top == self._max_capacity - 1 if self._flag_overflow else False
 
     
     def empty(self):
@@ -28,7 +29,7 @@ class Stack:
         empty Checks whether the Stack is empty.
 
         Returns:
-            boolean: Returns whether the Stack is empty.
+            boolean: Indicates whether the Stack is empty.
         '''
         return self._top == -1
 
@@ -63,7 +64,7 @@ class Stack:
         Returns:
             boolean: Conveys if the element is pushed successfully or not.
         '''
-        if not self.__check_overflow__():
+        if not self.full():
             self._stack += [element]
             self._top += 1
             return True
