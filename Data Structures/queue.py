@@ -67,8 +67,8 @@ class Queue:
         '''
         if not self.empty():
             val = self._queue[self._front]
-            del self._queue[self._front]
-            self._rear -= 1
+            self._queue[self._front] = None
+            self._front += 1
             return val
         else:
             return None
